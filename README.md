@@ -30,6 +30,51 @@ Host: localhost:3000
 
 ## Documentación
 
+### Crear usuario
+```http
+POST /users HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+Authorization: Bearer TU_TOKEN_AQUI
+```
+#### Entrada
+```json
+{
+  "email": "email@mail.com",
+  "password": "1234567890",
+  "age": 23,
+  "name": "Nombre Apellido"
+}
+```
+
+### Obtener datos del usuario
+```http
+GET /users HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+Authorization: Bearer TU_TOKEN_AQUI
+```
+#### Entrada
+```json
+{
+  "email": "email@mail.com",
+  "password": "1234567890",
+}
+```
+### Obtener todas las recetas
+```http
+GET /recipes HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+Authorization: Bearer TU_TOKEN_AQUI
+```
+#### Entrada
+```json
+{
+  "email": "email@mail.com",
+  "password": "1234567890",
+}
+```
 ### Ejemplo de petición
 
 ```http
