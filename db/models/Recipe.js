@@ -8,6 +8,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    ingredientes: {
+      type: DataTypes.JSON,
+      allowNull: false,
+    },
+    preparacion: {
+      type: DataTypes.JSON,
+      allowNull: false,
+    },
   });
 
   Recipe.associate = (models) => {

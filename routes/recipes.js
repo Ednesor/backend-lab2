@@ -2,6 +2,7 @@ var express = require("express");
 const { db } = require("../db/sequelize");
 var router = express.Router();
 const login = require("../middlewares/login");
+const inputPostRecipe = require("../middlewares/inputPostRecipe");
 
 //*Obtener todas las recetas
 router.get("/getall", login, async function (req, res, next) {
@@ -15,28 +16,32 @@ router.get("/getall", login, async function (req, res, next) {
 });
 
 //* Crear una receta
-router.post("/create", login, async function (req, res, next) {
+router.post("/create", login, inputPostRecipe, async function (req, res, next) {
   try {
     const { name, description, ingredients, preparation, email } = req.body;
     const user = await db.User.findOne({ where: { email } });
     if (!user) {
       return res.status(404).json({ error: "Usuario no encontrado" });
     }
+
     const recipe = await db.Recipe.create({
-      nombre: name,
+      titulo: name,
       descripcion: description,
       ingredientes: ingredients,
       preparacion: preparation,
       userId: user.id,
     });
     if (!recipe) {
+      console.log("Error al crear la receta");
       return res.status(400).json({ error: "Error al crear la receta" });
     }else {
       return res.status(201).json({ recipe });
     }
   } catch (error) {
+    console.log(error)
     return res.status(500).json({ error: "Error al crear la receta" });
   }
 });
+
 
 module.exports = router;
