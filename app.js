@@ -14,7 +14,7 @@ var recipesRouter = require('./routes/recipes');
 
 var app = express();
 app.use(cors({
-  origin: 'http://localhost:3001',
+  origin: 'https://prog2roco.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
