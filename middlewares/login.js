@@ -4,6 +4,7 @@ require('dotenv').config();
 async function login(req, res, next) {
   const {email, password} = req.body;
   const token = req.headers['authorization'];
+  console.log(email, password, token);
   if (!token) return res.status(401).json({ error: 'No autorizado' });
   if (token !== process.env.AUTORIZATION) return res.status(401).json({ error: 'No autorizado' });
   if (!email || !password) return res.status(401).json({ error: 'No autorizado' });

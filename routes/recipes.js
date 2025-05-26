@@ -5,13 +5,30 @@ const login = require("../middlewares/login");
 const inputPostRecipe = require("../middlewares/inputPostRecipe");
 
 //*Obtener todas las recetas
-router.get("/getall", login, async function (req, res, next) {
+router.get("/getall", async function (req, res, next) {
   try {
     const recipes = await db.Recipe.findAll();
     res.status(200).json({ recipes });
   } catch (error) {
     console.error("Error al obtener las recetas:", error);
     res.status(500).json({ error: "Error al obtener las recetas" });
+  }
+});
+
+//* Obtener una receta por ID
+router.get("/getone/:id", async function (req, res, next) {
+  try {
+    const { id } = req.params;
+    const recipe = await db.Recipe.findOne({
+      where: { id },
+    });
+    if (!recipe) {
+      return res.status(404).json({ error: "Receta no encontrada" });
+    }
+    res.status(200).json({ recipe });
+  } catch (error) {
+    console.error("Error al obtener la receta:", error);
+    res.status(500).json({ error: "Error al obtener la receta" });
   }
 });
 
@@ -23,7 +40,7 @@ router.post("/create", login, inputPostRecipe, async function (req, res, next) {
     if (!user) {
       return res.status(404).json({ error: "Usuario no encontrado" });
     }
-
+    console.log(name, description, ingredients, preparation, email);
     const recipe = await db.Recipe.create({
       titulo: name,
       descripcion: description,

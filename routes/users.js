@@ -7,7 +7,7 @@ const checkInputCreateUser = require("../functions/checkInputCreateUser");
 
 /* GET users listing. */
 //* GET: datos del usuario desde la base de datos
-router.get("/", login, async function (req, res, next) {
+router.post("/getDataUser", login, async function (req, res, next) {
   try {
     const { email, password } = req.body;
     const user = await db.User.findOne({

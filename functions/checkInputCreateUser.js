@@ -16,6 +16,7 @@ function checkInputCreateUser(name, email, age, password) {
     return false;
   }
   if (typeof name !== 'string' || typeof email !== 'string' || typeof password !== 'string' || typeof age !== 'number') {
+    console.log(typeof name, typeof email, typeof password, typeof age);
     console.log("type error en checkInputCreateUser");
     return false;
   }

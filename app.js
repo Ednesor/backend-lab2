@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const login = require('./middlewares/login.js');
+var cors = require('cors');
 
 const { connectDB } = require('./db/sequelize.js');
 
@@ -12,7 +13,11 @@ var usersRouter = require('./routes/users');
 var recipesRouter = require('./routes/recipes');
 
 var app = express();
-
+app.use(cors({
+  origin: 'http://localhost:3001',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+}));
 connectDB();
 
 // view engine setup
